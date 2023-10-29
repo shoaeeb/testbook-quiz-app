@@ -1,0 +1,262 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&display=swap");
+:root {
+  --heading-color: #0784f3;
+  --hover-color: #0573d4;
+  --para-color: #7a7a7b;
+  --category: #80c2fc;
+  --error-message: #fc4023;
+  --select: #0fae1d;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.container {
+  padding: 16px;
+  width: 600px;
+  height: auto;
+  transform: translateY(20%);
+  margin: 0 auto;
+
+  box-shadow: 3px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 3px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 0px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.user-details {
+  text-align: center;
+}
+.user-details .logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.logo img {
+  height: 70px;
+  width: 70px;
+}
+
+.user-details > * {
+  margin: 10px;
+}
+
+.user-details h3 {
+  color: var(--heading-color);
+}
+
+.user-details h5 {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.user-details form {
+  width: 100%;
+}
+input[type="text"]:focus {
+  outline: none;
+}
+.user-details form input[type="text"] {
+  width: 350px;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+}
+
+form button {
+  background-color: var(--heading-color);
+  color: #fff;
+  border: none;
+  padding: 5px;
+  width: 70px;
+  margin-left: 30px;
+}
+
+form button:hover {
+  background-color: var(--hover-color);
+}
+
+.user-details p {
+  color: var(--para-color);
+}
+
+.category-section {
+  padding: 16px;
+}
+
+.category-section > * {
+  margin-bottom: 6px;
+}
+
+.category-section h1,
+p {
+  color: var(--heading-color);
+  text-align: center;
+}
+
+.category-section .categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.categories div,
+.options div {
+  width: 250px;
+  border: 1px solid var(--hover-color);
+  background-color: var(--category);
+  color: #fff;
+  padding: 8px;
+  cursor: pointer;
+}
+.categories div:hover,
+.options div:hover {
+  background-color: var(--hover-color);
+}
+
+/* for error message */
+.message {
+  color: #fc4023;
+}
+
+.start-quiz {
+  text-align: center;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: var(--heading-color);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.selected-quiz {
+  background-color: var(--select) !important;
+}
+
+/* for quiz page */
+.container .header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.question p {
+  color: #000;
+  font-size: 20px;
+}
+.question {
+  border: 2px solid var(--hover-color);
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+/* .options {
+  display: flex;
+  flex-wrap: wrap;
+}
+.op */
+.question-num {
+  text-align: center;
+  display: block;
+  margin: 5px auto;
+  border: 1px solid var(--hover-color);
+  width: fit-content;
+  padding: 10px;
+  border-radius: 25px;
+}
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  margin: 13px 0;
+}
+
+.wrong-answer__container p {
+  color: var(--select);
+  font-size: 20px;
+}
+.pagination {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pagination button {
+  background-color: var(--heading-color);
+  color: white;
+  padding: 16px;
+  border-radius: 25px;
+  border: none;
+}
+/* for result page */
+.quiz-result-heading {
+  text-align: center;
+  color: var(--heading-color);
+  margin-bottom: 5px;
+}
+
+.stats > * {
+  margin-bottom: 8px;
+  color: #000;
+  font-weight: bold;
+}
+
+.review {
+  text-align: center;
+}
+
+.answers {
+  margin-top: 5px;
+}
+
+.answers > * {
+  margin-bottom: 5px;
+}
+.answers h4 {
+  font-size: 16px;
+}
+
+.finish {
+  background-color: var(--select);
+  text-decoration: none;
+  border-radius: 15px;
+}
+
+.goHome,
+.goToQuiz {
+  display: flex;
+  margin: 0 auto;
+  text-align: center;
+  background-color: var(--heading-color);
+  border-radius: 25px;
+  width: fit-content;
+  padding: 16px;
+}
+/* util classes */
+.correct-answer {
+  background-color: var(--select) !important;
+}
+.wrong-answer {
+  background-color: var(--error-message) !important;
+}
+.hidden {
+  display: none;
+}
+
+.good-score {
+  color: var(--select) !important;
+}
+
+.bad-score {
+  color: var(--error-message) !important;
+}

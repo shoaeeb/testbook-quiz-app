@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="src/styles/index.css" />
+    <script type="module" src="src/js/controller.js"></script>
+    <link rel="shortcut icon" href="src/img/logo.png" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="user-details">
+        <div class="logo">
+          <img src="src/img/logo.png" alt="Logo" />
+        </div>
+        <h3>Hello <span class="name--placeholder">User!</span></h3>
+        <h5>Enter your name to continue the quiz</h5>
+        <form method="post" action="#">
+          <input
+            name="participant-name"
+            type="text"
+            placeholder="Enter your name...."
+          />
+          <button>Enter</button>
+        </form>
+        <p>You'll have 10 seconds to answer each questions</p>
+      </div>
+      <div class="category-section">
+        <h1>Select Category</h1>
+        <p class="hidden message">Enter your name to continue</p>
+        <div class="categories">
+          <div data-quiz-id="165645">Pipes and Cisterns</div>
+          <div data-quiz-id="265645">Probability</div>
+          <div data-quiz-id="365645">Problem On Ages</div>
+          <div data-quiz-id="465645">Profit And Loss</div>
+        </div>
+      </div>
+        <a class = "hidden start-quiz" href="quiz.html">Start Quiz</div>
+    </div>
+  </body>
+</html>
