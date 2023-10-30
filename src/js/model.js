@@ -14,12 +14,15 @@ export function getQuizId() {
   return [state.prevQuizId, state.currQuizId];
 }
 export function addParticipant(name) {
+  //if there is a some participant just get the from local storage
   const storage = getLocalStorage();
-  console.log(storage);
+
+  //if there is then do this
   if (storage) {
     state.Particpants = storage;
   }
 
+  //else
   state.currParticipant = name;
   state.Particpants.push({
     id: crypto.randomUUID(),
@@ -42,18 +45,22 @@ export function getQuizById(id) {
   return quiz;
 }
 
+//to store the currParticipant in the local storage
 function storeLocalStorage() {
   localStorage.setItem("Particpants", JSON.stringify(state.Particpants));
 }
+//to get the currParticipant from the local storage
 
 function getLocalStorage() {
   return JSON.parse(localStorage.getItem("Particpants"));
 }
 
+//to store the currentquizid to local storage
 export function StoreCurrentQuizId() {
   localStorage.setItem("currQuizId", JSON.stringify(state.currQuizId));
 }
 
+//to get the current quiz id from local storage
 export function getCurrentQuizId() {
   state.currQuizId = +localStorage.getItem("currQuizId");
   return state.currQuizId;
@@ -63,7 +70,6 @@ export function getCurrentQuizId() {
 export function getQuestion(quesNumber) {
   if (quesNumber < 0) return state.currQuiz.questions[0];
   if (quesNumber > 9) return state.currQuiz.questions[9];
-  console.log(state.currQuiz.questions[quesNumber]);
   return state.currQuiz.questions[quesNumber];
 }
 
@@ -114,24 +120,29 @@ function alreadyAnswered(currQuesNum) {
   return state.currQuiz.questions[currQuesNum].isAnswered;
 }
 
+//mark question as correctly answered or not
 function markQuestion(currQuesNum, value) {
   state.currQuiz.questions[currQuesNum].correctlyAnswered = value;
 }
 
+//to mark a question is ansered
 function markQuestionAsAnswered(currQuesNum, value) {
   state.currQuiz.questions[currQuesNum].isAnswered = value;
 }
 
+//to get the correct answer the user just answered
 function getCorrectAnswerForCurrQuesNum(currQuesNum, correctAnswerId) {
   return state.currQuiz.questions[currQuesNum]?.options.find(
     (option) => option.id === correctAnswerId
   ).option;
 }
 
+//to update the score
 function updateScore() {
   state.Particpants[getCurrentParticipant()].score++;
 }
 
+//to update the currentParticipant array
 function updateParticipantsArray(
   currQuesNum,
   correctAnswerId,
@@ -155,6 +166,7 @@ function updateParticipantsArray(
   }
 }
 
+//to get the currScore
 export function getCurrScore() {
   return state.Particpants[getCurrentParticipant()]?.score;
 }
@@ -221,26 +233,35 @@ export function addCurrQuizIdToCurrParticipant() {
   storeLocalStorage();
 }
 
+//to store all the questionsm//
+//based on the corresponding topic
+
 export function storeCurrQuizQuestions() {
   localStorage.setItem("currQuizQuestions", JSON.stringify(state.currQuiz));
 }
 
+//to delete the quiz questions from local storage
 export function deleteCurrQuizQuestions() {
   localStorage.removeItem("currQuizQuestions");
 }
 
+//get currquiz questions
 export function getCurrQuizQuestions() {
   return JSON.parse(localStorage.getItem("currQuizQuestions"));
 }
 
+//get the curr question number
 export function getCurrQuestionNumber() {
   return state.currQuesNum;
 }
 
+//to set the currquestion number
 export function setCurrQuestionNumber(num) {
   state.currQuesNum = num;
 }
 
+//to rest the currParticipant array
+//to provide the start over again logic
 export function resetCurrParticipantObj() {
   const storage = getLocalStorage();
   if (storage) {

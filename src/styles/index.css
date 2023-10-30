@@ -14,6 +14,7 @@
   font-family: "Josefin Sans", sans-serif;
 }
 
+/* main container to show something on every page */
 .container {
   padding: 16px;
   width: 600px;
@@ -26,47 +27,61 @@
   -moz-box-shadow: 3px 0px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
+/* user details div */
 .user-details {
   text-align: center;
 }
+
+/* logo div inside user details */
 .user-details .logo {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
+
+/* the logo image */
 .logo img {
   height: 70px;
   width: 70px;
 }
 
+/* all the elements inside user details div */
 .user-details > * {
   margin: 10px;
 }
 
+/*Hello User Message */
 .user-details h3 {
   color: var(--heading-color);
 }
 
+/* The text Enter your name to continue */
 .user-details h5 {
   font-weight: bold;
   font-size: 20px;
 }
 
+/* form to submit the name */
 .user-details form {
   width: 100%;
 }
+
+/* input field inside the form  on focus*/
 input[type="text"]:focus {
   outline: none;
 }
+
+/* input field width */
 .user-details form input[type="text"] {
   width: 350px;
 }
 
+/* the form */
 form {
   display: flex;
   justify-content: center;
 }
-
+/* form buttonn enter */
 form button {
   background-color: var(--heading-color);
   color: #fff;
@@ -76,34 +91,41 @@ form button {
   margin-left: 30px;
 }
 
+/* on form button hover */
 form button:hover {
   background-color: var(--hover-color);
 }
 
+/* You'll have 10 seconds for each question */
 .user-details p {
   color: var(--para-color);
 }
 
+/* category div */
 .category-section {
   padding: 16px;
 }
 
+/* all elements inside the categorysectionm div */
 .category-section > * {
   margin-bottom: 6px;
 }
 
+/* heading and paragraph insied category section */
 .category-section h1,
 p {
   color: var(--heading-color);
   text-align: center;
 }
 
+/* categories inside tthe div */
 .category-section .categories {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
 
+/* all div inside categories and the options div */
 .categories div,
 .options div {
   width: 250px;
@@ -113,6 +135,8 @@ p {
   padding: 8px;
   cursor: pointer;
 }
+
+/* on hover over the div inside categories and options */
 .categories div:hover,
 .options div:hover {
   background-color: var(--hover-color);
@@ -123,6 +147,7 @@ p {
   color: #fc4023;
 }
 
+/* the start quiz button */
 .start-quiz {
   text-align: center;
   width: fit-content;
@@ -134,11 +159,13 @@ p {
   display: flex;
 }
 
+/* anchor style */
 a {
   text-decoration: none;
   color: white;
 }
 
+/* when the user select a quiz category topic */
 .selected-quiz {
   background-color: var(--select) !important;
 }
@@ -150,21 +177,20 @@ a {
   margin-bottom: 12px;
 }
 
+/* question paragraph */
 .question p {
   color: #000;
   font-size: 20px;
 }
+
+/* questionm div  */
 .question {
   border: 2px solid var(--hover-color);
   padding: 10px;
   margin-bottom: 5px;
 }
 
-/* .options {
-  display: flex;
-  flex-wrap: wrap;
-}
-.op */
+/* question num to show the currQuestion number */
 .question-num {
   text-align: center;
   display: block;
@@ -174,6 +200,8 @@ a {
   padding: 10px;
   border-radius: 25px;
 }
+
+/* all the options of the currquestion */
 .options {
   display: flex;
   flex-wrap: wrap;
@@ -182,15 +210,20 @@ a {
   margin: 13px 0;
 }
 
+/* to show the answer  insied the div
+when the user chose some options */
 .wrong-answer__container p {
   color: var(--select);
   font-size: 20px;
 }
+
+/* pagination div to showo next button */
 .pagination {
   display: flex;
   justify-content: space-between;
 }
 
+/* button inside the pagination button */
 .pagination button {
   background-color: var(--heading-color);
   color: white;
@@ -205,33 +238,41 @@ a {
   margin-bottom: 5px;
 }
 
+/* all the elements inside the div page */
 .stats > * {
   margin-bottom: 8px;
   color: #000;
   font-weight: bold;
 }
 
+/*  review div*/
 .review {
   text-align: center;
 }
 
+/* answeers div */
 .answers {
   margin-top: 5px;
 }
 
+/* all the elements inside answers div */
 .answers > * {
   margin-bottom: 5px;
 }
+
+/* heading inside the answer div */
 .answers h4 {
   font-size: 16px;
 }
 
+/* finish button to go to result page */
 .finish {
   background-color: var(--select);
   text-decoration: none;
   border-radius: 15px;
 }
 
+/* to show goHome and goTOQuiz on result page */
 .goHome,
 .goToQuiz {
   display: flex;
@@ -241,6 +282,14 @@ a {
   border-radius: 25px;
   width: fit-content;
   padding: 16px;
+}
+
+/* to display text only 10 seconds for each question
+inside quiz.html */
+.note {
+  text-align: center;
+  color: var(--error-message);
+  display: block;
 }
 /* util classes */
 .correct-answer {

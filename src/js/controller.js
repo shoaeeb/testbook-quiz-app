@@ -1,22 +1,25 @@
 import * as model from "./model.js";
-import userDetailsView from "./userdetailsView.js";
-import quizCategoryView from "./quizCategoryView.js";
-import quizView from "./quizView.js";
-import resultView from "./resultView.js";
-const TIME = 100; //time in seconds for timer//10 seconds for every question //10*10//==100 seconds in total
+import userDetailsView from "./view/userdetailsView.js";
+import quizCategoryView from "./view/quizCategoryView.js";
+import quizView from "./view/quizView.js";
+import resultView from "./view/resultView.js";
 
+const TIME = 100; //time in seconds for timer//10 seconds for every question //10*10//==100 seconds in total
+let currTime = performance.now();
+let elapsedTime = performance.now();
 //timer
 function startTimer() {
   let time = TIME;
   let tick = function () {
     let minute = Math.trunc(time / 60);
     let second = Math.trunc(time % 60);
+    elapsedTime = performance.now();
     //if there is timer on the scrren show it
     if (quizView.showTimerOnUI(minute, second)) {
       //store timetaken
       model.storeTimeTaken(TIME - time);
       //for each questionm there is only 10 seconds
-      if ((TIME - time) % 10 == 0 && time != 120) {
+      if (Math.trunc(((elapsedTime - currTime) / 1000) % 10) === 0) {
         const currQuestionNum = model.getCurrQuestionNumber();
         quizView.renderQuiz(
           model.getQuestion(currQuestionNum),
@@ -36,8 +39,6 @@ function startTimer() {
     }
     if (time === 0) {
       clearInterval(timer);
-
-      //stop the quiz and go to result page
     }
 
     time--;
@@ -47,6 +48,7 @@ function startTimer() {
   return timer;
 }
 function onAddFormSubmission(name) {
+  //add the name
   model.addParticipant(name);
   //hide anyErrorMessage
   //hide error message like
@@ -72,6 +74,7 @@ function onSelectQuiz(id, e) {
   model.state.currQuizId = id;
   //store the currQuizId in the local Storage
   model.StoreCurrentQuizId();
+  //if the user is toggle over the categories
   const [prevQuizId, currQuizId] = model.getQuizId();
   quizCategoryView.toggleSelectCategoryQuiz(prevQuizId, currQuizId);
   //show start quiz button
@@ -82,13 +85,18 @@ function onSelectQuiz(id, e) {
 //get the currQuizId
 //render the first Question and its option
 function onStartQuiz() {
+  //get the current quiz id
   model.getCurrentQuizId();
+  //if no quiz id found return early
   if (!model.state.currQuizId) return;
+  //get the current quiz question by the id
   const quiz = model.getQuizById(model.state.currQuizId);
+  //store the quiz id to currParticipant array
   model.addCurrQuizIdToCurrParticipant();
+  //show the topic name on the UI
   quizView.renderQuizTopic(quiz.topic);
+  //get the total number of question
   quizView.getTotolQuestions(model.state.currQuiz.questions.length);
-  //initial
   //start the timer
   const timer = startTimer();
   //load the first questions
@@ -97,39 +105,59 @@ function onStartQuiz() {
   //logic for start over again
   if (window.location.href.includes("quiz.html"))
     model.resetCurrParticipantObj();
+  //add the click event handler functions to make
+  //options clickable
   quizView.addOptionsClickHandler(onClickQuizOptions);
 }
 
 //for the next button logic
 function controlPagination(e) {
+  //if correct button is clicked
+  //on the pagination
+  //guard clause
+  //if not correct button then return
   if (!quizView.correctButtonClicked(e)) return;
+
+  //for the next button
+  //if clicked correct just do this
   if (quizView.nextButtonClicked(e)) {
+    //get the value from the element
     const nextQues = +e.target.dataset.pageNext;
-    console.log(nextQues);
+    // render the next Ques on click the next button
     quizView.renderQuiz(model.getQuestion(nextQues), nextQues);
+    //set the currQuestion number
     model.setCurrQuestionNumber(nextQues);
   }
   // //hide the answer container whenever user clicks  next
   quizView.hideAnswerContainer();
   quizView.addOptionsClickHandler(onClickQuizOptions);
   quizView.hideNextButton();
+  currTime = performance.now();
 }
 
 function onClickQuizOptions(optionNumber, currQuestionNumber, e) {
-  console.log(currQuestionNumber);
+  //when the user clicks on options
   const [res, answer] = model.storeUserOptions(
     optionNumber,
     currQuestionNumber
   );
-  //quizView.hideAnswerContainer(res);
+
+  ///show the answer in answer div on the quiz.html page
   if (res == -1) return alert("You already attemped that question");
   if (res) e.target.classList.add("correct-answer");
   if (!res) e.target.classList.add("wrong-answer");
+
+  //to update the score
   quizView.updateScoreOnUI(model.getCurrScore());
+  //to show the answer
   quizView.showCorrectAnswer(answer);
+  //the next button
   quizView.renderPagination(currQuestionNumber);
+  //to add a click event handler on the next button
   quizView.addNextPrevButtonHandler(controlPagination);
+  //if the quiz is finish to go to result page
   quizView.addFinishHandler(model.goToResultPage);
+  //to set the current question number
   model.setCurrQuestionNumber(currQuestionNumber);
 }
 
@@ -137,6 +165,7 @@ function onClickQuizOptions(optionNumber, currQuestionNumber, e) {
 //result.html
 resultView.onAddResultHandler(model.getFinalResult);
 function init() {
+  // all the handler that needs to pass when the page loads
   userDetailsView.addFormHander(onAddFormSubmission);
   quizCategoryView.addSelectQuizHandler(onSelectQuiz);
   quizView.addStartQuizHandler(onStartQuiz);

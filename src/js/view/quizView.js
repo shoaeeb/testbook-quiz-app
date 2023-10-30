@@ -102,7 +102,6 @@ class QuizView extends View {
   //for the options the user will click in
   //when answering the quiz
   addOptionsClickHandler(handler) {
-    console.log(this._options);
     //when there is no option just return
     if (!this._options) return;
     this._options.addEventListener("click", (e) => {
