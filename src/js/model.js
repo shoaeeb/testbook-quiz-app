@@ -117,7 +117,7 @@ export function storeUserOptions(userChose, currQuesNum) {
 
 //helpers function
 function alreadyAnswered(currQuesNum) {
-  return state.currQuiz.questions[currQuesNum].isAnswered;
+  return state.currQuiz.questions[currQuesNum]?.isAnswered;
 }
 
 //mark question as correctly answered or not
